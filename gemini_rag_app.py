@@ -108,7 +108,7 @@ embedding_model = SentenceTransformer(
 # ---------------- OPENROUTER API ---------------- #
 
 client_ai = OpenAI(
-    api_key="YOUR OPEN API KEY",
+    api_key=st.secrets["OPENROUTER_API_KEY"],
     base_url="https://openrouter.ai/api/v1"
 )
 
