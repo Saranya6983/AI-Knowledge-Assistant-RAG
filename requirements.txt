@@ -9,6 +9,5 @@ openai
 sentence-transformers
 fpdf
 SpeechRecognition
-pyaudio
 scikit-learn
 torch
