@@ -95,7 +95,9 @@ uploaded_files = st.file_uploader(
 
 # ---------------- CHROMADB ---------------- #
 
-client = chromadb.Client()
+client = chromadb.PersistentClient(
+    path="./chroma_db"
+)
 
 try:
     client.delete_collection("documents")
@@ -105,10 +107,6 @@ except:
 collection = client.create_collection(
     name="documents"
 )
-embedding_model = SentenceTransformer(
-    "all-MiniLM-L6-v2"
-)
-
 # ---------------- OPENROUTER API ---------------- #
 
 client_ai = OpenAI(
