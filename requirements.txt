@@ -1,0 +1,14 @@
+streamlit
+pypdf
+python-docx
+python-pptx
+Pillow
+pytesseract
+chromadb
+openai
+sentence-transformers
+fpdf
+SpeechRecognition
+pyaudio
+scikit-learn
+torch
