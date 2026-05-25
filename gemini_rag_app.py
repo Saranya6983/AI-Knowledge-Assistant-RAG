@@ -7,7 +7,11 @@ import pytesseract
 import chromadb
 from openai import OpenAI
 from fpdf import FPDF
-import speech_recognition as sr
+try:
+    import speech_recognition as sr
+    voice_enabled = True
+except:
+    voice_enabled = False
 from sentence_transformers import SentenceTransformer
 # ---------------- PAGE CONFIG ---------------- #
 
@@ -344,31 +348,37 @@ margin-top:20px;
 
 # ---------------- VOICE INPUT ---------------- #
 
-st.subheader("🎤 Voice Question")
+if voice_enabled:
 
-question = ""
+    st.subheader("🎤 Voice Question")
 
-if st.button("🎙 Start Recording"):
+    question = ""
 
-    recognizer = sr.Recognizer()
+    if st.button("🎙 Start Recording"):
 
-    try:
+        recognizer = sr.Recognizer()
 
-        with sr.Microphone() as source:
+        try:
 
-            st.info("Speak now...")
+            with sr.Microphone() as source:
 
-            audio = recognizer.listen(source)
+                st.info("Speak now...")
 
-            voice_text = recognizer.recognize_google(audio)
+                audio = recognizer.listen(source)
 
-            st.success(f"You said: {voice_text}")
+                voice_text = recognizer.recognize_google(audio)
 
-            question = voice_text
+                st.success(f"You said: {voice_text}")
 
-    except Exception as e:
+                question = voice_text
 
-        st.error("Microphone not working. Install PyAudio.")
+        except Exception as e:
+
+            st.error("Microphone not supported on deployment.")
+
+else:
+
+    st.warning("Voice feature disabled on cloud deployment.")
 
 # ---------------- CHAT INPUT ---------------- #
 
